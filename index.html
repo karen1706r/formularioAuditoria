@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instrumento de Auditoría</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<h1 class="titulo">Instrumento de Auditoría</h1>
+
+<div class="card">
+
+    <div class="form-group">
+        <label>1. Referencia de la Auditoría</label>
+        <input id="ref" value="AUD-2025-001">
+    </div>
+
+    <div class="form-group">
+        <label>2. Información del Auditado</label>
+        <input id="auditado" value="Proceso de Gestión Documental - Área TI">
+    </div>
+
+    <div class="form-group">
+        <label>3. Objetivo y Alcance</label>
+        <textarea id="objetivo">Verificar el cumplimiento del proceso frente al SGSI.</textarea>
+    </div>
+
+    <div class="form-group">
+        <label>4. Criterio de Auditoría</label>
+        <input id="criterio" value="ISO 27001:2022 - A.5.9">
+    </div>
+
+    <div class="form-group">
+        <label>5. Ítem / Pregunta de Verificación</label>
+        <input id="pregunta" value="¿El proceso cuenta con evidencia documentada y actualizada que respalde el cumplimiento del control?">
+    </div>
+
+    <div class="form-group">
+        <label>6. Evidencia Objetiva Recopilada</label>
+        <textarea id="evidencia">Se revisaron manuales, actas y procedimientos.</textarea>
+    </div>
+
+    <div class="form-group">
+        <label>7. Clasificación</label>
+        <select id="clasificacion">
+            <option>Conforme</option>
+            <option>No Conforme</option>
+            <option>Observación</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>8. Hallazgo Detallado</label>
+        <textarea id="hallazgo">La documentación cumple con los requisitos.</textarea>
+    </div>
+
+    <div class="form-group">
+        <label>9. Ubicación de la Evidencia</label>
+        <input id="ubicacion" value="SGSI/Documentación/2025">
+    </div>
+
+</div>
+
+<button class="btn-download" onclick="generarPDF()">Descargar PDF</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+function generarPDF() {
+    const elemento = document.querySelector(".card");
+
+    html2pdf().set({
+        margin:       0,
+        filename:     'Instrumento_Auditoria.pdf',
+        html2canvas: {
+            scale: 2,
+            scrollY: 0,
+            scrollX: 0
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    })
+    .from(elemento)
+    .save();
+}
+
+</script>
+
+</body>
+</html>
